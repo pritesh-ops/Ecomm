@@ -1,6 +1,16 @@
+# Core Requirements
 Django==4.2.0
 psycopg2-binary==2.9.9
 python-dotenv==1.0.0
+
+# Production Server
 gunicorn==21.2.0
+
+# Static Files
 whitenoise==6.6.0
+
+# Environment Management
 django-environ==0.11.2
+
+# Debugging (Development Only - Uncomment for local use)
+django-debug-toolbar==4.1.0
