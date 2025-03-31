@@ -143,3 +143,29 @@ class Profile(View):
             )
 
         return HttpResponseRedirect("/profile/")
+
+
+class SaveAddress(View):
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect("/login?next=/profile/")
+            
+        street = request.POST.get("street")
+        city = request.POST.get("city")
+        state = request.POST.get("state")
+        zip_code = request.POST.get("zip_code")
+        country = request.POST.get("country")
+
+        # Create and save the new address
+        address = user_models.Addresses.objects.create(
+            user=request.user,
+            street=street,
+            city=city,
+            state=state,
+            zip_code=zip_code,
+            country=country
+        )
+        address.save()
+
+        messages.success(request, "Address saved successfully", "alert-success")
+        return HttpResponseRedirect("/profile/")
